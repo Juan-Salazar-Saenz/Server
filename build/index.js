@@ -39,7 +39,7 @@ class Server {
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
-            console.log('Server on port', this.app.get('port'), "192.168.0.24");
+            console.log('Server on port', this.app.get('port'));
         });
     }
 }
