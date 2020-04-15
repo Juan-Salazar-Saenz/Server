@@ -23,6 +23,7 @@ class Server {
     config() {
         //settings 
         this.app.set('port', process.env.port || 3000);
+        this.app.set('hostname', process.env.hostname || "127.0.0.1");
         //middlewares
         this.app.use(morgan_1.default('dev'));
         this.app.use(cors_1.default());
@@ -38,8 +39,8 @@ class Server {
         this.app.use('/apiD', devolucionRoutes_1.default);
     }
     start() {
-        this.app.listen(this.app.get('port'), () => {
-            console.log('Server on port', this.app.get('port'));
+        this.app.listen(this.app.get('port'), this.app.get('hostname'), () => {
+            console.log('Server http://', this.app.get('hostname'), ':', this.app.get('port'));
         });
     }
 }
