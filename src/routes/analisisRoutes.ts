@@ -10,7 +10,7 @@ class AnalisisRoutes {
     }
 
     config(): void {
-        this.router.get('/', (req, res) => res.send('Usuario'));
+        this.router.get('/', (req, res) => res.send('Analisis'));
         this.router.post('/', analisisController.saveAnalisis);        
     }
 }

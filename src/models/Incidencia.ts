@@ -24,4 +24,4 @@ const IncidenciaSchema = new Schema ({
 
 type NewType = Incidencia;
 
-export default model<NewType>('Incidencia', IncidenciaSchema);  
+export default model<NewType>('Incidencia', IncidenciaSchema); 

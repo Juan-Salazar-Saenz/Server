@@ -10,7 +10,7 @@ class DevolucionRoutes {
     }
 
     config(): void {
-        this.router.get('/', (req, res) => res.send('Devoluciom'));
+        this.router.get('/', (req, res) => res.send('Devolucion'));
         this.router.post('/', devolucionController.saveDevolucion);        
     }
 }

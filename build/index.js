@@ -12,6 +12,7 @@ const creacionRoutes_1 = __importDefault(require("./routes/creacionRoutes"));
 const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const analisisRoutes_1 = __importDefault(require("./routes/analisisRoutes"));
 const devolucionRoutes_1 = __importDefault(require("./routes/devolucionRoutes"));
+const tipoIncidenteRoutes_1 = __importDefault(require("./routes/tipoIncidenteRoutes"));
 //databse
 require("./database");
 class Server {
@@ -23,7 +24,7 @@ class Server {
     config() {
         //settings 
         this.app.set('port', process.env.port || 3000);
-        this.app.set('hostname', process.env.hostname || "127.0.0.1");
+        //this.app.set('hostname', process.env.hostname || "127.0.0.1" )     
         //middlewares
         this.app.use(morgan_1.default('dev'));
         this.app.use(cors_1.default());
@@ -37,10 +38,13 @@ class Server {
         this.app.use('/apiB', usuarioRoutes_1.default);
         this.app.use('/apiC', analisisRoutes_1.default);
         this.app.use('/apiD', devolucionRoutes_1.default);
+        this.app.use('/apiE', tipoIncidenteRoutes_1.default);
     }
     start() {
-        this.app.listen(this.app.get('port'), this.app.get('hostname'), () => {
-            console.log('Server http://', this.app.get('hostname'), ':', this.app.get('port'));
+        this.app.listen(this.app.get('port'), () => {
+            //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{    
+            //console.log('Server http://',  this.app.get('hostname'),':' , this.app.get('port'));
+            console.log('Server http://hostname:', this.app.get('port'));
         });
     }
 }
