@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.estadoOneController = void 0;
 const Incidencia_1 = __importDefault(require("../models/Incidencia"));
 class EstadoOneController {
     list(req, res) {

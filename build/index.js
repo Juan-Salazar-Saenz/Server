@@ -6,6 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+//instalar para que todo funcione
+// npm install
+// npm i express morgan cors
+// npm install nodemon -D 
+// npm install -g typescript
+// npm run build
+// npm run dev
 //import routes
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const creacionRoutes_1 = __importDefault(require("./routes/creacionRoutes"));
@@ -24,7 +31,7 @@ class Server {
     config() {
         //settings 
         this.app.set('port', process.env.port || 3000);
-        //this.app.set('hostname', process.env.hostname || "127.0.0.1" )     
+        this.app.set('hostname', process.env.hostname || "127.0.0.1");
         //middlewares
         this.app.use(morgan_1.default('dev'));
         this.app.use(cors_1.default());
@@ -43,8 +50,8 @@ class Server {
     start() {
         this.app.listen(this.app.get('port'), () => {
             //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{    
-            //console.log('Server http://',  this.app.get('hostname'),':' , this.app.get('port'));
-            console.log('Server http://hostname:', this.app.get('port'));
+            console.log('Server http://', this.app.get('hostname'), ':', this.app.get('port'));
+            //console.log('Server http://hostname:' , this.app.get('port'));
         });
     }
 }

@@ -2,6 +2,14 @@ import express, {Application} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
+//instalar para que todo funcione
+// npm install
+// npm i express morgan cors
+// npm install nodemon -D 
+// npm install -g typescript
+// npm run build
+// npm run dev
+
 //import routes
 import indexRoutes from './routes/indexRoutes';
 import creacionRoutes from './routes/creacionRoutes';
@@ -26,7 +34,7 @@ class Server {
     config():void{
         //settings 
         this.app.set('port', process.env.port || 3000);   
-        //this.app.set('hostname', process.env.hostname || "127.0.0.1" )     
+        this.app.set('hostname', process.env.hostname || "127.0.0.1" )     
 
         //middlewares
         this.app.use(morgan('dev'));
@@ -48,8 +56,8 @@ class Server {
     start():void{
         this.app.listen(this.app.get('port'),() =>{
         //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{    
-           //console.log('Server http://',  this.app.get('hostname'),':' , this.app.get('port'));
-            console.log('Server http://hostname:' , this.app.get('port'));
+           console.log('Server http://',  this.app.get('hostname'),':' , this.app.get('port'));
+            //console.log('Server http://hostname:' , this.app.get('port'));
         });
     }
 }
