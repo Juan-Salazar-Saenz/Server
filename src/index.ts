@@ -1,3 +1,5 @@
+import fs from 'fs';
+import https from 'https';
 import express, {Application} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -7,6 +9,8 @@ import cors from 'cors';
 // npm i express morgan cors
 // npm install nodemon -D 
 // npm install -g typescript
+// npm install https
+// npm install fs
 // npm run build
 // npm run dev
 
@@ -24,8 +28,13 @@ import './database';
 class Server {
 
     public app: Application;
+    public certificado = "";
 
     constructor (){
+        const tamaño = __dirname.length - 6;
+        const carpeta = __dirname;
+        this.certificado = carpeta.substring(0,tamaño);
+        console.log(this.certificado);
         this.app = express();
         this.config();
         this.routes();
@@ -54,9 +63,14 @@ class Server {
     }
 
     start():void{
-        this.app.listen(this.app.get('port'),() =>{
-        //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{    
-           console.log('Server http://',  this.app.get('hostname'),':' , this.app.get('port'));
+
+        https.createServer({
+            key: fs.readFileSync(this.certificado + '/my_cert.key'),
+            cert: fs.readFileSync(this.certificado + '/my_cert.crt')
+        }, this.app).listen(this.app.get('port'),() =>{
+        //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{      
+           console.log('Server https://',  this.app.get('hostname'),':' , this.app.get('port'));
+          
             //console.log('Server http://hostname:' , this.app.get('port'));
         });
     }

@@ -3,6 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const https_1 = __importDefault(require("https"));
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
@@ -11,6 +13,8 @@ const cors_1 = __importDefault(require("cors"));
 // npm i express morgan cors
 // npm install nodemon -D 
 // npm install -g typescript
+// npm install https
+// npm install fs
 // npm run build
 // npm run dev
 //import routes
@@ -24,6 +28,11 @@ const tipoIncidenteRoutes_1 = __importDefault(require("./routes/tipoIncidenteRou
 require("./database");
 class Server {
     constructor() {
+        this.certificado = "";
+        const tamaño = __dirname.length - 6;
+        const carpeta = __dirname;
+        this.certificado = carpeta.substring(0, tamaño);
+        console.log(this.certificado);
         this.app = express_1.default();
         this.config();
         this.routes();
@@ -48,9 +57,12 @@ class Server {
         this.app.use('/apiE', tipoIncidenteRoutes_1.default);
     }
     start() {
-        this.app.listen(this.app.get('port'), () => {
-            //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{    
-            console.log('Server http://', this.app.get('hostname'), ':', this.app.get('port'));
+        https_1.default.createServer({
+            key: fs_1.default.readFileSync(this.certificado + '/my_cert.key'),
+            cert: fs_1.default.readFileSync(this.certificado + '/my_cert.crt')
+        }, this.app).listen(this.app.get('port'), () => {
+            //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{      
+            console.log('Server https://', this.app.get('hostname'), ':', this.app.get('port'));
             //console.log('Server http://hostname:' , this.app.get('port'));
         });
     }
