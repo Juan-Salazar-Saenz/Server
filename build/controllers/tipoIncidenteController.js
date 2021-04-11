@@ -17,14 +17,16 @@ const tipoincidente_1 = __importDefault(require("../models/tipoincidente"));
 class TipoIncidenteController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tipoIncidente = yield tipoincidente_1.default.find();
+            const { numero } = req.params;
+            console.log(req.params);
+            const tipoIncidente = yield tipoincidente_1.default.find({ 'numero': Number.parseInt(numero) });
             return res.json(tipoIncidente);
         });
     }
     saveTipoincidente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nombre } = req.body;
-            const tipoIncidente = new tipoincidente_1.default({ nombre });
+            const { numero, nombre } = req.body;
+            const tipoIncidente = new tipoincidente_1.default({ numero, nombre });
             yield tipoIncidente.save();
             return res.json({ text: "Tipo de incidente guardado correctamente" });
         });

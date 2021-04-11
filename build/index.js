@@ -17,6 +17,12 @@ const cors_1 = __importDefault(require("cors"));
 // npm install fs
 // npm run build
 // npm run dev
+//Generar un certificado SSL
+// openssl genrsa -aes256 -out my_cert.pem 2048
+// openssl req -new -key my_cert.pem -out my_cert.csr
+// openssl x509 -req -days 365 -in my_cert.csr -signkey my_cert.pem -out my_cert.crt
+// openssl rsa -in my_cert.pem -out my_cert.key
+// Los cuatro archivos deben ir en la raiz para que cuando se compile el javascrip encuentre los archivo en la raiz
 //import routes
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const creacionRoutes_1 = __importDefault(require("./routes/creacionRoutes"));
@@ -63,6 +69,7 @@ class Server {
         }, this.app).listen(this.app.get('port'), () => {
             //this.app.listen(this.app.get('port'), this.app.get('hostname') ,() =>{      
             console.log('Server https://', this.app.get('hostname'), ':', this.app.get('port'));
+            console.log('Server https://34.67.198.7:3000');
             //console.log('Server http://hostname:' , this.app.get('port'));
         });
     }

@@ -9,7 +9,7 @@ class TipoIncidenteRoutes {
     }
     config() {
         this.router.get('/', (req, res) => res.send('Tipo de Incidenite'));
-        this.router.get('/full', tipoIncidenteController_1.tipoIncidenteController.list);
+        this.router.get('/full/:numero', tipoIncidenteController_1.tipoIncidenteController.list);
         this.router.post('/', tipoIncidenteController_1.tipoIncidenteController.saveTipoincidente);
     }
 }
