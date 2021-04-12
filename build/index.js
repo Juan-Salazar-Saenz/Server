@@ -17,6 +17,8 @@ const cors_1 = __importDefault(require("cors"));
 // npm install fs
 // npm run build
 // npm run dev
+//https://127.0.0.1:3000/
+//https://34.67.198.7:3000/
 //Generar un certificado SSL
 // openssl genrsa -aes256 -out my_cert.pem 2048
 // openssl req -new -key my_cert.pem -out my_cert.csr
